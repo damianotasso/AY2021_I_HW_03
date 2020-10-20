@@ -15,11 +15,15 @@
     #include "project.h"
     
     #define HEADER 0xA0
+    #define IDLE 0
     #define HEADER_RECEIVED 1
+    #define ERROR 2
+    #define V_RECEIVED 3
+    #define COMPLETE 4
+    #define TIME 5 
     #define TAIL 0xC0
     
     
-    uint8_t flag;
     uint8_t received;
     uint8_t rx_index;
     uint8_t flag_time;

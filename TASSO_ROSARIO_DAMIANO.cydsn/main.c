@@ -28,7 +28,50 @@ int main(void)
 
     for(;;)
     {
-        if(flag == 1)
+        switch(state)
+        {
+            
+            case V_RECEIVED:
+                Timer_Stop();
+                UART_Init();
+                UART_PutString("RGB LED Program $$$");
+                rx_index = 0;
+                state = IDLE;
+                break;
+            case ERROR:
+                Timer_Stop();
+                UART_Init();
+                UART_PutString("Error, in the trasmitted string\r\n"); 
+                rx_index = 0;
+                state = IDLE;
+                break;
+            case TIME:
+                Timer_Stop();
+                UART_Init();
+                rx_index = 0;
+                UART_PutString("Error, byte not received in 5 seconds\r\n");
+                state = IDLE;
+                break;
+            case COMPLETE:
+                RGBLed_Write_Led_Color(init);
+                Timer_Stop();
+                UART_Init();
+                UART_PutString("Initialization completed\r\n");
+                rx_index = 0;
+                state = IDLE;
+                break;
+        }
+    }
+}
+
+/* [] END OF FILE */
+
+
+
+
+
+
+/*if(flag == 1)
         {
             if((rx_index == 1) && (received == HEADER))
             {
@@ -56,7 +99,7 @@ int main(void)
                     blue_received = received;
                     flag = 0;
                 }
-                /*
+                
                 switch(rx_index)
                 {
                     case 2:
@@ -74,7 +117,7 @@ int main(void)
                         blue_received = received;
                         flag = 0;
                         break;
-                }*/
+                }
             }
             if((rx_index == 5 ) && (received == TAIL))
             {
@@ -102,7 +145,4 @@ int main(void)
             }
         }
         
-    }
-}
-
-/* [] END OF FILE */
+    }*/

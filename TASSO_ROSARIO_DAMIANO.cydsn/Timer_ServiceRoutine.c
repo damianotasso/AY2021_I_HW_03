@@ -14,8 +14,7 @@
 
 CY_ISR(TIMER_ISR)
 {
-    flag_time = 1;
-    flag = 0;
-    rx_index = 0;
+    Timer_ReadStatusRegister();
+    state = TIME;
 }
 /* [] END OF FILE */

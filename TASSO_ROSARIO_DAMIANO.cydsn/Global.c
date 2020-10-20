@@ -12,7 +12,6 @@
 #include "Global.h"
 
 
-uint8_t flag = 0;
 uint8_t received = 0;
 uint8_t rx_index = 0;
 uint8_t flag_time = 0;
