@@ -1,12 +1,6 @@
 /* ========================================
- *
- * Copyright YOUR COMPANY, THE YEAR
- * All Rights Reserved
- * UNPUBLISHED, LICENSED SOFTWARE.
- *
- * CONFIDENTIAL AND PROPRIETARY INFORMATION
- * WHICH IS THE PROPERTY OF your company.
- *
+ * Damiano R Tasso 944232
+ * 
  * ========================================
 */
 #ifndef __UART_SERVICE_ROUTINE_H__

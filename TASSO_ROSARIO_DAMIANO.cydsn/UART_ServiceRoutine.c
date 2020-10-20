@@ -1,12 +1,12 @@
 /* ========================================
+ * Damiano R Tasso 944232
  *
- * Copyright YOUR COMPANY, THE YEAR
- * All Rights Reserved
- * UNPUBLISHED, LICENSED SOFTWARE.
- *
- * CONFIDENTIAL AND PROPRIETARY INFORMATION
- * WHICH IS THE PROPERTY OF your company.
- *
+ * The UART is set so that an interrupt is generated every time is reved a byte. 
+ * Every time the interrupt is generated the receved byte is read with the UART_ReadRxData(), the Timer is reset in the way to start and count the right period
+ * and the rx_index in incremented. 
+ * For each incrementation of the rx_index and if the right condition of the received byte is correct, I know which part of the string I had received. \in this
+ * way is possible to set the state variable in the right way, in order to control the initialization in the main.c.
+ * 
  * ========================================
 */
 #include "UART_ServiceRoutine.h"

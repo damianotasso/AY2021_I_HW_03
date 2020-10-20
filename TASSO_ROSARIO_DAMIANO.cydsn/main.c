@@ -1,13 +1,13 @@
-/* ========================================
+/* ==========================================================================================================================
+ * Damiano R Tasso 944232
+ * 
+ * The code presents a logic in which every time the state changes its value differets functions are used:
+ * - Timer_Stop(): timer stopped to keep track of the time;
+ * - UART_Init(): initialize the Uart.
+ * rx_index and state are initialized in order to be in the wating state (IDLE) and to be in the beginnig situation.
+ * In the state == COMPLETE is used the RGBLed_Write_Led_Color(init) function to initialize the color received by the string.
  *
- * Copyright YOUR COMPANY, THE YEAR
- * All Rights Reserved
- * UNPUBLISHED, LICENSED SOFTWARE.
- *
- * CONFIDENTIAL AND PROPRIETARY INFORMATION
- * WHICH IS THE PROPERTY OF your company.
- *
- * ========================================
+ * ==========================================================================================================================
 */
 #include "project.h"
 #include "UART_ServiceRoutine.h"
@@ -30,7 +30,9 @@ int main(void)
     {
         switch(state)
         {
-            
+            case HEADER_RECEIVED:
+                Timer_Stop();
+                break;
             case V_RECEIVED:
                 Timer_Stop();
                 UART_Init();
@@ -56,7 +58,7 @@ int main(void)
                 RGBLed_Write_Led_Color(init);
                 Timer_Stop();
                 UART_Init();
-                UART_PutString("Initialization completed\r\n");
+                UART_PutString("Initialization completed!\r\n");
                 rx_index = 0;
                 state = IDLE;
                 break;
@@ -65,84 +67,3 @@ int main(void)
 }
 
 /* [] END OF FILE */
-
-
-
-
-
-
-/*if(flag == 1)
-        {
-            if((rx_index == 1) && (received == HEADER))
-            {
-                state = HEADER_RECEIVED;
-                flag = 0; 
-                Timer_Stop();
-            }
-            if(state == HEADER_RECEIVED)
-            {
-                if(rx_index == 2)
-                {
-                    Timer_Stop();
-                    red_received = received;
-                    flag = 0;
-                }
-                if(rx_index == 3)
-                {
-                    Timer_Stop();
-                    green_received = received;
-                    flag = 0;
-                }
-                if(rx_index == 4)
-                {
-                    Timer_Stop();
-                    blue_received = received;
-                    flag = 0;
-                }
-                
-                switch(rx_index)
-                {
-                    case 2:
-                        Timer_Stop();
-                        red_received = received;
-                        flag = 0;
-                        break;
-                    case 3:
-                        Timer_Stop();
-                        green_received = received;
-                        flag = 0;
-                        break;
-                    case 4:
-                        Timer_Stop();
-                        blue_received = received;
-                        flag = 0;
-                        break;
-                }
-            }
-            if((rx_index == 5 ) && (received == TAIL))
-            {
-                Timer_Stop();
-                init.red = red_received;
-                init.green = green_received;
-                init.blue = blue_received;
-                RGBLed_Write_Led_Color(init);
-                UART_PutString("Initialization completed!\r\n");
-                rx_index = 0;
-                flag = 0;
-            }
-            if(received == 'v')
-            {
-                UART_PutString("RGB LED Program $$$");
-                rx_index = 0;
-                flag = 0;
-            }
-            
-            if((flag_time == 1) && (received != 'v'))
-            {
-                UART_PutString("Error, byte not received in 5 seconds!\r\n");
-                Timer_Stop();
-                flag = 0;
-            }
-        }
-        
-    }*/
